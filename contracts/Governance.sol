@@ -1,7 +1,9 @@
 // SPDX-License-Identifier: UNLICENSED
-pragma solidity >=0.7.0 <0.9.0;
+pragma solidity 0.8.24;
 
 contract Voting {
+
+    address public owner;
 
     // initialize an empty array to hold vote options
     string[] public options;
@@ -10,7 +12,7 @@ contract Voting {
     // A record of addresses/accounts that has voted
     mapping (address => bool) private hasVoted;
 
-    event Vote(address indexed _user, string _option);
+    event VoteLog(address indexed _user, string _option);
 
     // constructor function to initialize the voting options
     constructor(string[] memory _options) {
@@ -27,6 +29,9 @@ contract Voting {
     */
 
     function vote(string memory _option) public {
+
+        // require(msg.sender == owner, "You aren't the owner");
+
         // Check if the sender has already voted
         require(!hasVoted[msg.sender], "You have already voted.");
 
@@ -52,7 +57,7 @@ contract Voting {
         // Mark the sender's address as having voted to prevent multiple votes
         hasVoted[msg.sender] = true;
 
-        emit Votes(msg.sender, _option);
+        emit VoteLog(msg.sender, _option);
     }
 
     /** 
@@ -70,7 +75,5 @@ contract Voting {
     function checkIfUserVoted(address _user) public view returns (bool) {
         return hasVoted[_user];
     }
-
-
 
 }
