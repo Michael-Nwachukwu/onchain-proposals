@@ -9,8 +9,7 @@ describe('Voting', function () {
         const options = ["Option1", "Option2", "Option3"];
         const Voting = await hre.ethers.getContractFactory("Voting");
         const voting = await Voting.deploy(options);
-        // await voting.deployed();
-
+        
         // Owner votes for Option1
         await voting.connect(owner).vote("Option1");
 
