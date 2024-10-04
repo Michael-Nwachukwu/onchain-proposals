@@ -70,6 +70,7 @@ contract ProposalContract {
     }
 
     function executeProposal(uint256 _proposalId) public {
+        
         require(_proposalId > 0 && _proposalId < proposalCount, "Invalid proposal ID");
         Proposal storage proposal = proposals[_proposalId];
 
